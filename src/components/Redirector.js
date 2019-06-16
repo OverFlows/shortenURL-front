@@ -17,7 +17,9 @@ export default class Redirector extends React.Component {
       this.constructor.name
     );
     const { fromUrlKey } = this.props.match.params;
-    console.log("la cle", fromUrlKey);
+    //console.log("Key", fromUrlKey);
+
+    // existency and visits count update
     try {
       const response = await axios.post(
         "https://short-url-back-florent-argod.herokuapp.com/redirection/update",
@@ -25,10 +27,9 @@ export default class Redirector extends React.Component {
           fromUrlKey: fromUrlKey
         }
       );
-      console.log("la reposne", response.data);
       this.setState({
         isLoading: false, // loading done
-        redirection: response.data
+        redirection: response.data // set redirection info
       });
     } catch (error) {
       console.log("error", error);
@@ -40,7 +41,6 @@ export default class Redirector extends React.Component {
 
   render() {
     if (this.state.isLoading) {
-      console.log("loading");
       // anything you want to render before loading end
       return null;
     }
@@ -48,11 +48,11 @@ export default class Redirector extends React.Component {
     console.log("mon url", this.state.redirection.toUrl);
     return (
       <div>
+        => redirecting to :
         {this.state.redirection.toUrl
           ? (window.location.href = this.state.redirection.toUrl)
           : (window.location.href =
               "https://short-url-florent-argod.herokuapp.com/")}
-        }
       </div>
     );
   }

@@ -19,15 +19,9 @@ export default class RedirectionsList extends React.Component {
     });
   }
 
-  redirectionClick = e => {
-    e.preventDefault();
-    console.log("mon event", e.target.href);
-  };
-
+  // render table with original URL | shorten URL | visits
   render() {
     if (this.state.isLoading) {
-      console.log("loading");
-      console.log(window.location.href);
       // anything you want to render before loading end
       return null;
     }

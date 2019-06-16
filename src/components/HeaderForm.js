@@ -21,12 +21,11 @@ export default class HeaderForm extends React.Component {
     });
   }
 
+  //update submit on this from :
   handleSubmit = async e => {
-    // e.preventDefault();
-    console.log(this.state);
+    e.preventDefault();
 
-    //TODO gestion du handle
-
+    //create a new entry in the DB
     try {
       const response = await axios.post(
         "https://short-url-back-florent-argod.herokuapp.com/redirection/create",
@@ -37,12 +36,13 @@ export default class HeaderForm extends React.Component {
 
       console.log(response);
       let newRedirection = response.data;
+      // action up ! to update the caller state (App)
       this.props.onSubmit(newRedirection);
 
-      alert(`creation d'une nouvelle url ${this.state.url}`);
+      //alert(`creation d'une nouvelle url ${this.state.url}`);
     } catch (error) {
       console.log(error);
-      alert("Une erreur est survenue.");
+      // alert("Une erreur est survenue.");
     }
   };
 
