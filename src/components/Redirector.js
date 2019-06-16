@@ -20,7 +20,7 @@ export default class Redirector extends React.Component {
     console.log("la cle", fromUrlKey);
     try {
       const response = await axios.post(
-        "http://localhost:3001/redirection/update",
+        "https://short-url-back-florent-argod.herokuapp.com/redirection/update",
         {
           fromUrlKey: fromUrlKey
         }
@@ -50,7 +50,8 @@ export default class Redirector extends React.Component {
       <div>
         {this.state.redirection.toUrl
           ? (window.location.href = this.state.redirection.toUrl)
-          : (window.location.href = "https://google.fr")}
+          : (window.location.href =
+              "https://short-url-florent-argod.herokuapp.com/")}
         }
       </div>
     );

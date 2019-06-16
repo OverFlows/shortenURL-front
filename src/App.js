@@ -22,17 +22,18 @@ export default class App extends React.Component {
       "componentDidMount has been called from ",
       this.constructor.name
     ); */
-    console.log("public url: ", process.env.PUBLIC_URL);
 
-    axios.get(`http://localhost:3001/redirection`).then(response => {
-      //Debug: check response content:
-      // console.log(response.data);
+    axios
+      .get(`https://short-url-back-florent-argod.herokuapp.com/redirection`)
+      .then(response => {
+        //Debug: check response content:
+        // console.log(response.data);
 
-      this.setState({
-        redirections: response.data, //pu
-        isLoading: false // loading done
+        this.setState({
+          redirections: response.data, //pu
+          isLoading: false // loading done
+        });
       });
-    });
   }
 
   // Update component state when a user submit a new url to short

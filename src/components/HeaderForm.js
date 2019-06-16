@@ -29,7 +29,7 @@ export default class HeaderForm extends React.Component {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/redirection/create",
+        "https://short-url-back-florent-argod.herokuapp.com/redirection/create",
         {
           toUrl: this.state.url
         }
