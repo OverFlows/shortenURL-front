@@ -15,12 +15,14 @@ export default class App extends React.Component {
     redirections: [] //array all of existing redirections
   };
 
+  //retrieve all current redirections that exist on the server side :
   async componentDidMount() {
     //Debug: check components has been used:
     /*  console.log(
       "componentDidMount has been called from ",
       this.constructor.name
     ); */
+    console.log("public url: ", process.env.PUBLIC_URL);
 
     axios.get(`http://localhost:3001/redirection`).then(response => {
       //Debug: check response content:
@@ -33,12 +35,14 @@ export default class App extends React.Component {
     });
   }
 
+  // Update component state when a user submit a new url to short
   handleSubmit = newRedirection => {
     console.log("handleSubmit has been called from App");
     let nextRedirections = [newRedirection, ...this.state.redirections];
     this.setState({ redirections: nextRedirections });
   };
 
+  //render App :)
   render() {
     if (this.state.isLoading) {
       console.log("loading");
@@ -50,14 +54,14 @@ export default class App extends React.Component {
     return (
       <Router>
         <div>
-          {/*  <div>Je suis le composant {this.constructor.name}</div> */}
+          {/*  <div>Je suis le composant {this.constructor.name}</div> use for debug at the origin*/}
           <HeaderForm onSubmit={this.handleSubmit} />
         </div>
         <Route
           exact
           path="/"
           render={() => {
-            return <RedirectionsList redirections={redirections} />;
+            return <RedirectionsList redirections={redirections} />; // display redirections list
           }}
         />
         <Route path="/:fromUrlKey" component={Redirector} />
